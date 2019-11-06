@@ -79,7 +79,10 @@ class Transformer(object):
             x = Conv1DLayer( self.state_size, 1, 1, 'dc', act = self.act )( attn, is_training )
 
         return x_norm + x
-           
+
+"""
+From OpenAI
+"""         
 class GPT2(object):
 
     def __init__(self, n_ctx=1024, n_head=4, n_layer=4):

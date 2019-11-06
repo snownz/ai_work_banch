@@ -64,6 +64,9 @@ def count_neurons(v):
 
 # =============================================== optmizer operations =============================================== 
 
+"""
+From OpenAI
+"""  
 def flatgrad(loss, var_list, clip_norm=None):
     
     grads = tf.gradients( loss, var_list )
@@ -182,6 +185,9 @@ def zero_padding2d(x, pad=(3, 3)):
 
 # =============================================== non-lieanr functions =============================================== 
 
+"""
+From OpenAI
+"""  
 def gelu(x, name=""):
     with tf.variable_scope('gelu'):
         x = 0.5 * x * ( 1 + tf.tanh( np.sqrt( 2 / np.pi ) * ( x + 0.044715 * tf.pow( x, 3 ) ) ) )
@@ -226,6 +232,9 @@ def bn(x, center=True, scale=True, decay=0.9, is_training=False, name=''):
         x = tf.layers.batch_normalization( x, trainable = is_training, training = is_training, center = center, scale = scale, name = name )
         return x
 
+"""
+From OpenAI
+"""  
 def norm(x, name, axis=-1, epsilon=1e-5, is_training=False):
 
     n_state = x.shape[ axis ].value
@@ -291,6 +300,9 @@ def get_median(v):
     mid = v.get_shape()[0]//2 + 1
     return tf.nn.top_k(v, mid).values[-1]
 
+"""
+From OpenAI
+"""  
 def positional_encoding(x, position, d_model):
 
     def get_angles(position, i, d_model):

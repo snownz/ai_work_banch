@@ -162,6 +162,9 @@ def multihead_attn(q, k, v):
     a = tf.matmul( s, v )
     return w, s, a
 
+"""
+From OpenAI
+"""  
 def masked_multihead_attn(q, k, v):
 
     # q, k, v have shape [ batch, heads, sequence, features ]
@@ -175,6 +178,9 @@ def masked_multihead_attn(q, k, v):
     a = tf.matmul( s, v )
     return w, s, a
 
+"""
+From OpenAI
+"""  
 def mask_attn_weights(w):
 
     # w [ batch, heads, dst_sequence, src_sequence ], where information flows from src to dst.
@@ -186,6 +192,9 @@ def mask_attn_weights(w):
     w = w * b - tf.cast( 1e10, w.dtype ) * ( 1 - b )
     return w
 
+"""
+From OpenAI
+"""  
 def attention_mask(nd, ns, *, dtype):
     """1's in the lower triangle, counting from the lower right corner.
     Same as tf.matrix_band_part(tf.ones([nd, ns]), -1, ns-nd), but doesn't produce garbage on TPUs.
@@ -195,15 +204,24 @@ def attention_mask(nd, ns, *, dtype):
     m = i >= j - ns + nd
     return tf.cast( m, dtype )
 
+"""
+From OpenAI
+"""  
 def merge_heads(x):
     """Smash the last two dimensions of x into a single dimension."""
     *start, a, b = shape_list(x)
     return tf.reshape( x, start + [ a * b ] )
 
+"""
+From OpenAI
+"""  
 def split_heads(x, n_head):
     # From [batch, sequence, features] to [batch, heads, sequence, features]
     return tf.transpose( split_states( x, n_head ), [ 0, 2, 1, 3 ] )
 
+"""
+From OpenAI
+"""  
 def split_states(x, n):
     """Reshape the last dimension of x into [n, x.shape[-1]/n]."""
     *start, m = shape_list(x)
